@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="{% static '' %}" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="canonical" href="http://injector.codes" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@CySuite_" />
+        <meta name="twitter:creator" content="@CySuite_" />
+        <meta property="og:url" content="http://injector.codes" />
+        <meta property="theme-color" content="#373434" />
+        <meta property="msapplication-TileColor" content="#373434" />
+        <meta property="referrer" content="no-referrer-when-downgrade" />
+        <meta property="HandheldFriendly" content="True" />
+        <meta property="MobileOptimized" content="360" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Code Injector</title>
+        <meta name="robots" content="index,follow" />
+        <meta name="googlebot" content="index,follow" />
+        <meta name="description" content=""/>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="" />
+        <meta property="og:description" content=""/>
+        <meta property="og:image" content="{% static '' %}"/>
+        <meta property="og:image:width" content="1280" />
+        <meta property="og:image:height" content="720" />
+        <meta property="og:site_name" content="Injector" />
+        <meta property="keywords" content="" />
+        <meta name="twitter:title" content="" />
+        <meta name="twitter:image" content="{% static '' %}"/>
+        <meta property="og:image:type" content="image/png" />
+        <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <main class="content">
+            <div class="tab-pane" role="tabpanel">
+                <div class="card injector-div">
+                    <h2 class="injector-title">Code Injection</h2>
+                </div>
+                <div class="resizer" style="float:left; width: 49%;">
+                    <div class="card" style="width: 100%">
+                        <div class="card-body" style="padding-bottom: 0;">
+                            <div class="tooltip-container">
+                                <h6 class="card-title">Payload:&nbsp;<i class="fa fa-info-circle"></i></h6>
+                                <span class="tooltip">Add a JS or PHP payload that can get triggered when the document is processed.</span>
+                            </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div style="padding-left: 10px;">
+                                    <textarea type="text" name="payload" class="form-control" cols="40" rows="10"></textarea>
+                                    <code>Example: &lt;?php system("cat /etc/passwd");?&gt;</code>
+                                    <div class="mt-3">
+                                        <h5>Dimensions</h5>
+                                        <div class="mr-3" style="width: 10%; float: left;">
+                                            <input class="form-control" type="number" placeholder="W" name="width" style="font-size: 0.9rem;"></input>
+                                        </div>
+                                        <div class="mr-3" style="width: 10%; float: left;">
+                                            <input class="form-control" type="number" placeholder="H" name="height" style="font-size: 0.9rem;"></input>
+                                        </div>
+                                        <div class="mr-3" style="width: 15%; float: left;">
+                                            <select class="form-control" name="file_type">
+                                                <option selected>PNG</option>
+                                                <option>GIF</option>
+                                                <option>BMP</option>
+                                                <option>JPEG</option>
+                                            </select>
+                                        </div>
+                                        <div class="mr-3" style="width: 35%; float: left;">
+                                            <input class="form-control" type="text" pattern="^[a-zA-Z0-9._ -]+$" placeholder="file.ext" name="filename" required></input>
+                                        </div>
+                                    </div>
+                                    {% if success_message %}
+                                        <button style="display: none;" class="alert-popup" id="alert-success" name="{{ success_message }}" value="success"></button>
+                                    {% endif %}
+                                    {% if error_message %}
+                                        <button style="display: none;" class="alert-popup" id="alert-danger" name="{{ error_message }}" value="danger"></button>
+                                    {% endif %}
+                                    <div class="mb-4 inject-card">
+                                        <button type="submit" class="btn btn-primary inject-button">Inject</button>
+                                    </div>
+                                    <div class="mt-2" style="min-height: 50px;">
+                                        <h4 style="width: 33%; float: left;">File type:</h4>
+                                        <h4 style="width: 33%; float: left;">File extension:</h4>
+                                        <h4 style="width: 33%; float: left;">File size:</h4>
+                                        <h4>
+                                            <code style="width: 33%; float: left;">{{ file_type }}</code>
+                                        </h4>
+                                        <h4>
+                                            <code style="width: 33%; float: left;">{{ extension }}</code>
+                                        </h4>
+                                        <h4>
+                                            <code style="width: 33%; float: left;">{{ file_size }}</code>
+                                        </h4>
+                                    </div>
+                                    <div class="mt-2">
+                                        <h4 style="width: 33%; float: left;">Mime Type:</h4>
+                                        <h4 style="width: 33%; float: left;">Dimensions:</h4>
+                                        <h4 style="width: 33%; float: left;">Byte Match:</h4>
+                                        <h4>
+                                            <code style="width: 33%; float: left;">{{ mime_type }}</code>
+                                        </h4>
+                                        <h4>
+                                            <code style="width: 33%; float: left;">{{ dimensions }}</code>
+                                        </h4>
+                                        <h4>
+                                            <code style="width: 33%; float: left;">{{ byte_match }}</code>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-lg my-2">
+                                <tbody>
+                                    <tr>
+                                        <th><h4>Your IP</h4></th>
+                                        <td><code style="font-size: 0.9rem;">{{ ipaddress }}</code></td>
+                                    </tr>
+                                    <tr>
+                                        <th><h4>Final file:</h4></th>
+                                        <td>
+                                            <h5>
+                                                {% if download|length > 0 %}
+                                                    <a href="https://cysuite-bucket.s3.us-west-2.amazonaws.com/media/{{ download }}" download rel="noopener noreferrer" target="_blank">Download</a>
+                                                {% else %}
+                                                    <a href="">Download</a>
+                                                {% endif %}
+                                            </h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <h4>Status</h4>
+                                        </th>
+                                        {% if status == 'Injected successfully' or status == 'Viewing full hex code' %}
+                                            <td>
+                                                <span class="badge bg-success">{{ status }}</span>
+                                            </td>
+                                        {% else %}
+                                            <td>
+                                                <span class="badge bg-warning">{{ status }}</span>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="resizer" style="float:right; width: 49%;">
+                    <div class="card" style="width: 100%">
+                        <div class="card-body">
+                            <h6 class="card-title">Hex Viewer</h6>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div style="padding-left: 10px;">
+                                    <div class="row">
+                                        <div class="input-resizer" style="width:100%;">
+                                            <textarea type="password" class="form-control" rows="10" style="font-size:0.85rem; width:100%; height: 665px; background-color: #000; border: 1px solid #000; color: #00ff00; padding: 8px; font-family: courier new;" readonly>{% for line in hex_dump %}{{line}}{% endfor %}</textarea>
+                                        </div>
+                                        <div style="width: 100%; margin-top: 1rem;">
+                                            <button type="submit" name="clear" class="btn btn-primary clear-button">Clear</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <small><a href="" onclick="event.preventDefault(); document.getElementById('magic-form').submit();">View full Hex code / last code</a></small>
+                                <form id="magic-form" method="POST" style="display: none;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="full_hex"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
