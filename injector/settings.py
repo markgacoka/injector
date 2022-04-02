@@ -1,6 +1,9 @@
 import os
 import django_heroku
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -52,7 +55,7 @@ WSGI_APPLICATION = 'injector.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('ENGINE'),
-        'HOST': 'localhost',
+        'HOST': os.environ.get('DB_HOST'),
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS'),
