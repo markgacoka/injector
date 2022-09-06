@@ -8,7 +8,6 @@ body {
     background-color: #f7f9fc;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    padding: 2rem 5rem;
 }
 
 a {
@@ -235,14 +234,8 @@ small {
     opacity: 1;
 }
 
-.form-control:disabled, .form-control[readonly] {
-    background-color: #f8fafd;
-    opacity: 1;
-}
-
 textarea.form-control {
-    height: 18rem;
-    font-size:0.9rem;
+    font-size:0.8rem;
     width:100%;
     padding: 8px;
     font-family: courier new;
@@ -530,10 +523,6 @@ input[type=number] {
     box-shadow: 0 0 10px rgba(55, 125, 255, .1);
 }
 
-.form-control[readonly] {
-    background-color: transparent;
-}
-
 *, :after, :before {
     box-sizing: border-box;
 }
@@ -740,3 +729,34 @@ textarea {
     content: "\f05a";
 }
 
+.login {
+    display: flex;
+    float: right;
+    width: 100%;
+    padding: 1rem 2.5rem;
+}
+
+.login-btn {
+    width: 10vw;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0.25rem 0.7rem;
+    border-radius: 0.2rem;
+    color: #fff;
+    background-color: rgba(9, 14, 36, 0.9);
+    line-height: 2rem;
+    font-size: 1rem;
+    margin-left: auto; 
+    margin-right: 0;
+}
+
+.hex-viewer {
+    font-size: 0.8rem;
+    width: 100%;
+    height: 41.7rem;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #00ff00;
+    padding: 8px;
+    font-family: courier new; 
+}
