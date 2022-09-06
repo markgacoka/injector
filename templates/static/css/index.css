@@ -373,10 +373,6 @@ textarea.form-control {
     margin: 0;
 }
 
-.bg-warning {
-    background-color: #e5a54b !important;
-}
-
 .badge {
     color: #fff;
     display: inline-block;
@@ -680,6 +676,10 @@ textarea {
 
 .mb-4 {
     margin-bottom: 1.5rem !important;
+}
+
+.bg-success {
+    background-color: #4bbf73 !important
 }
 
 .bg-warning {

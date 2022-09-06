@@ -14,9 +14,6 @@
         <link href="{% static 'css/index.css' %}" rel="stylesheet">
     </head>
     <body>
-        <div class="login">
-            <button class="login-btn" onclick="location.href='http://www.example.com'">Login</button>
-        </div>
         <main class="content">
             <div class="tab-pane" role="tabpanel">
                 <div class="card injector-div">
@@ -56,9 +53,6 @@
                                     </div>
                                     {% if success_message %}
                                         <button style="display: none;" class="alert-popup" id="alert-success" name="{{ success_message }}" value="success"></button>
-                                    {% endif %}
-                                    {% if error_message %}
-                                        <button style="display: none;" class="alert-popup" id="alert-danger" name="{{ error_message }}" value="danger"></button>
                                     {% endif %}
                                     <div class="mb-4 inject-card">
                                         <button type="submit" class="btn btn-primary inject-button">Inject</button>
@@ -106,7 +100,7 @@
                                         <td>
                                             <h5>
                                                 {% if download|length > 0 %}
-                                                    <a href="https://cysuite-bucket.s3.us-west-2.amazonaws.com/media/{{ download }}" download rel="noopener noreferrer" target="_blank">Download</a>
+                                                    <a href="media/payloads/{{ download }}" download rel="noopener noreferrer" target="_blank">Download</a>
                                                 {% else %}
                                                     <a href="">Download</a>
                                                 {% endif %}
@@ -117,7 +111,7 @@
                                         <th>
                                             <h4>Status</h4>
                                         </th>
-                                        {% if status == 'Injected successfully' or status == 'Viewing full hex code' %}
+                                        {% if 'successfully' in status or 'viewing' in status %}
                                             <td>
                                                 <span class="badge bg-success">{{ status }}</span>
                                             </td>
